@@ -1,0 +1,204 @@
+</DOCTYPE html> 
+<html lang= "en" dir="ltr">
+<head>
+    <meta charset ="utf-8">
+    <link rel="stylesheet" href="Homepage.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class = "red">
+        <nav class ="navbar">
+            <img class="img"></img>
+    
+            <a   href="index.html">Home</a>
+    
+            <a  href="Tiles.html">Games</a>
+    
+            <a href="Dog BR.html">Dog Sim</a> 
+
+            <div class="dropdown">
+                <button class="dropbtn">Apps
+                <div class="dropdown-content" id ="Mydropdown">
+                    <a  href="Weight Rate.html">Weight Scanner</a>
+    
+                    <a  href="Music Player.html">Music Player</a>
+    
+                    <a  href="Trading Scanner.html">Trading Logger</a>
+                </div>
+            </div>
+
+        <div class="search-container">
+
+        <input type="text" placeholder="Search.." name="search">
+
+      <button type="submit"><i class="fa fa-search"></i></button>
+
+    </div>
+</nav>    
+<div style="background-image: url('cookie\ wallpaper.jpg');" class="norep" position="relative">
+        <h1 class ="title" id = "stroke">Cookie Bytes</h1> 
+            <p class = "styles">They're the yummies of life so why not get a taste of them? </p>
+  
+    <div class ="row">
+        <div class = "column leftside">
+            <div class ="card">
+                <div class="fakeimg" style="height:30px;">
+                    <h2 class="height">About</h2>
+                </div>
+                    <img src="https://github.com/Jrres/WebStartup/blob/main/hunie.jpg?raw=true --allow-file-access-from-files" align="right" class="intoyou" id="a">
+                </div>
+                <div class ="card">
+                    <input type="image" src="drop.png" name="this" class="aboutme"/>
+                <div class="hidden" id="hidden">
+                <p1 hidden>Insta:</p1>
+                <input type="image" src="Insta.jpg" name="Insta" width="50" height="50" ></input>
+                <br><br>
+                <p2 hidden>Git:</p2>
+                <input type="image" src="GitHub.png" name="Github" width="50" height="50" ></input>
+                <br><br>
+                <p>
+                    *I'm a full time CS student dev new to web design and data structures seeking to improve my skills in all languages<br><br>
+                </p>
+                    <p>
+                    *Languages learned: Java, C#, JS, CSS, HTML, PHP, SQL, Arduino, python<br><br>
+                    </p>
+                    <p>
+                    *Current projects: TD endless runner game + Dog(Battle royale - unity) Game, bodybuilding app, trade viewer(w/t scanner),and dynamic keyboard game using real piano <br>
+                    </p>
+            </div>
+        </div>
+        <div class ="card">
+            <h2 align=center>Purpose:</h2>
+            <div class="fakeimg" style="height:30px;">
+                <div class="tab">
+                    <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">
+                        
+                        <div class =fitness >
+    
+                        </div>
+                        Fitness
+                    </button>
+                    <button class="tablinks" onclick="openCity(event, 'Paris')">
+                        <div class =Gamelife >
+    
+                        </div>
+                        Game Design
+                    </button>
+                    <button class="tablinks" onclick="openCity(event, 'Tokyo')">
+                        <div class =applife>
+    
+                        </div>
+                        Applications
+                    </button>
+                  </div>
+                  <div id="London" class="tabcontent">
+                    <p>Teach the best, safest, and most dependable way to lose weight and gain muscle.</p>
+                  </div>
+                  
+                  <div id="Paris" class="tabcontent">
+                    <p>Develop immersive 2d/3d games in the UI</p> 
+                  </div>
+                  
+                  <div id="Tokyo" class="tabcontent">
+                    <p>Design interactive apps with various features.</p>
+                  </div>
+                  
+            </div>
+        </div>
+</div>
+<div class = "column middle">
+    <div class="fakeimg" style="height:30px;">
+        <p1 class = "blank"> middle</p1>
+    </div>
+                
+            </div>      
+<div class = "column rightside">
+    <div class="fakeimg" style="height:30px;">
+</div>
+
+        <table class ="data">
+            <h3 class="top" align= "center" >Leader Board</h3>  
+                <tr>
+         
+                    <th >top ten</th>   
+                    <th >time</th> 
+       
+                </tr>
+                <tr>
+                 
+                    <td id = "user" >jr</td>
+                    <td id = "user" >50s</td>
+               
+                </tr>
+                <tr>
+                   
+                    <td id = "user">penguinz</td>
+                    <td id = "user" >50s</td>
+                  
+                </tr>
+                <tr>
+                    
+                    <td id = "user">saucy</td>
+                    <td id = "user" >50s</td>
+                    
+                </tr>
+                <tr>
+                   
+                    <td id = "user">eating999S</td> 
+                    <td id = "user" >50s</td>
+                    
+                </tr>  
+            </div>
+        </table>
+        <style>
+            .colorforbg{
+                background-color:  rgb(206, 76, 126); background-size:100%
+            }
+        </style>
+        <div class= "colorforbg" >
+        <div class="fakeimg" style="height:30px;"></div>
+        <div class="body" style =height:600px; >
+        <h1 align=center>Updates:</h1>
+        <li class = "list">layout dividers</li> 
+        <li class = "list">3 fold page design</li>
+        <li class = "list">uniformity in each page</li>  
+    </div>
+        </div>
+    
+</div>
+<script src="about.js"></script>
+<script>
+'use strict'
+const nav = document.querySelector("dropbtn");
+nav.addEventListener('click', function() {
+    var getnav = document.querySelector("navbar");
+    
+    if(getnav="dropbtn"){
+        document.querySelector("navbar").style.position= none;
+    }
+    else{
+        document.querySelector("navbar").style.position= sticky; 
+    }
+})
+</script>
+<script>
+    function openCity(evt, cityName) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+    
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+    </script>
+    
+</body>
+</html>
+

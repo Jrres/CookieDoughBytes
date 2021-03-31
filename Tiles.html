@@ -1,0 +1,65 @@
+</DOCTYPE html>
+<html lang= "en" dir="ltr">
+<head>
+    <meta charset ="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href ="Main.css">
+    <link rel="stylesheet" href="Homepage.css">
+    <style>
+        #gameScreen{
+            border: 1px solid white;
+        }
+    </style>
+</head>     
+<nav class ="navbar">
+
+    <img class="img"></img>
+
+    <a   href="index.html">Home</a>
+
+    <a  href="Tiles.html">Games</a>
+
+    <a href="Dog BR.html">Dog Sim</a> 
+
+    <div class="dropdown">
+        <button class="dropbtn">Apps
+        <div class="dropdown-content" id ="Mydropdown">
+            <a  href="Weight Rate.html">Weight Scanner</a>
+
+            <a  href="Music Player.html">Music Player</a>
+
+            <a  href="Trading Scanner.html">Trading Logger</a>
+        </div>
+    </div>
+        <div class="search-container">
+
+        <input type="text" placeholder="Search.." name="search">
+
+      <button type="submit"><i class="fa fa-search"></i></button>
+      
+    </div>
+</nav>  
+<body class = "dark-theme">
+    <div>
+    <h1 class = "leftpos" >
+        TILES GAME:  
+    </h1>
+
+    <canvas id="GameScreen" width=800 height=600  ></canvas>
+
+        <img src = "https://github.com/Jrres/WebStartup/blob/main/sqr.gif?raw=true --allow-file-access-from-files" class  = "imgpos"></img>
+    </div>
+<ul>
+   <p id= "msg"  > Rules : </p> 
+    <li class = "list"  > Move by pressing the up/down and side arrow keys.</li>
+    <li class = "list" > Travel to each square until the whole board is green. </li>
+    <li class = "list" >  Exit the maze!</li>
+    <button class = "btn" id="btn">Dark</button>
+</ul>
+    <script src="index.js"></script>
+    <script src="app.js" ></script>
+    <noscript>You need to enable javascript to view this site.</noscript>
+    </body>
+</html>
+
+

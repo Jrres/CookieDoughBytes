@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&family=Stick&display=swap');
+body{
+font-family :monospace;
+margin:0;
+}
+.leftpos{
+margin-top: 60;
+text-align: left;
+height:500;
+font-family: 'Russo One', sans-serif;
+}
+.imgpos{
+height: 200px;
+width: 200px;
+background-size: cover;
+display: block;
+margin-left: auto;
+margin-right: auto;
+border-radius: 100%;
+background: none;
+outline-style:none; 
+}
+#msg{
+text-align: left;
+font-family: Fredoka One, Arial, Helvetica, sans-serif;
+margin: 20;
+padding:50;
+border:#00FF9E;
+text-decoration: dashed;
+}
+ul{
+border: solid red;
+width:20%;
+}
+div.pos:hover{
+background:#0c262c;
+position:relative;
+padding:2;
+}
+.list:hover{
+text-decoration: underline;
+}
+.pos{
+text-align:left;
+list-style-type: none;
+font-family: Fredoka One, Arial, Helvetica, sans-serif;
+font-weight:500;
+float:middle;
+font-size: 20px;
+font-weight: 5000;
+letter-spacing: .9px;
+text-decoration: none;
+}
+*{
+color: var(--fontColor);
+font-family:Fredoka One, Arial, Helvetica, sans-serif;
+}
+/* the star is a universal selector. It applies to all page elements*/
+/* * is setting the default color property for the page*/
+body{
+background: var(--bg);
+}
+.dark-theme{
+--bg: var(--black);
+--fontColor: var(--cyan);
+--btnBg: var(--cyan);
+--btnFontColor: var(--black);
+}
+.light-theme{
+--bg: var(--cyan);
+--fontColor: var(--black);
+--btnBg: var(--black);
+--btnFontColor: var(--cyan);
+}
+.fadeWhite{
+animation: fadeWhite 5s forwards;  
+}
+.fadeBlack{
+animation: fadeBlack 3s forwards;
+}
+/*root represents the html ele -- here we define 3 global 
+vars to define 3 colors*/
+:root{
+--cyan: #38ff7a;
+--black: #000000;
+--white: white;
+}
+@keyframes fadeWhite{
+from {background: black; --btnBg:#00FF9E; --btnFontColor: black; --fontColor: var(--cyan);}
+to {background: #00FF9E; --btnBg: black; --btnFontColor: #00FF9E; --fontColor: var(--black);}
+}
+@keyframes fadeBlack{
+from   { --btnFontColor: #00FF9E;--fontColor: var(--black);background: #00FF9E;--btnBg: black;}  
+to  { --btnFontColor: black;--fontColor: var(--cyan);background: black;--btnBg: #00FF9E;}
+}
+.btn{
+position: fixed;
+top:60;
+left:97%;
+height: 50px;
+width: 50px;
+border-radius: 50%;
+border: none;
+color: var(--btnFontColor);
+background-color: var(--btnBg);
+}
+.btn:focus{
+outline-style:none; 
+}
+.btn:hover{
+opacity:50%;
+}
