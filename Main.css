@@ -5,18 +5,16 @@ font-family :monospace;
 margin:0;
 }
 .leftpos{
-margin-top: 60;
-text-align: left;
-height:500;
+
+height:200;
 font-family: 'Russo One', sans-serif;
 }
 .imgpos{
 height: 200px;
 width: 200px;
+float:left;
 background-size: cover;
 display: block;
-margin-left: auto;
-margin-right: auto;
 border-radius: 100%;
 background: none;
 outline-style:none; 
@@ -37,6 +35,16 @@ div.pos:hover{
 background:#0c262c;
 position:relative;
 padding:2;
+}
+.list{
+    border: red 1px solid;
+    border-radius: 20%;
+    border-start-start-radius: 150px;
+    width:400px;
+    line-height:20px;
+    text-decoration:none;
+    transform: translate(300px);
+    
 }
 .list:hover{
 text-decoration: underline;

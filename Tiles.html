@@ -8,6 +8,12 @@
     <style>
         #gameScreen{
             border: 1px solid white;
+            float:right;
+            transform: translate(-400px);
+        }
+        img{
+            display:none;
+
         }
     </style>
 </head>     
@@ -36,28 +42,32 @@
         <input type="text" placeholder="Search.." name="search">
 
       <button type="submit"><i class="fa fa-search"></i></button>
-      
+    
     </div>
 </nav>  
 <body class = "dark-theme">
-    <div>
-    <h1 class = "leftpos" >
-        TILES GAME:  
-    </h1>
+    <div class= "leftpos">
+    <h1 align=center >
 
-    <canvas id="GameScreen" width=800 height=600  ></canvas>
+        Cookie TD :  
+    </h1>
+ </div>
+
+	<img id="img_bat" src="cookie bar.jpg" >	
+	<img id="img_purpstone" src="purpblock.png">	
+
+	<canvas id="gameScreen" width="800" height="600" ></canvas>
 
         <img src = "https://github.com/Jrres/WebStartup/blob/main/sqr.gif?raw=true --allow-file-access-from-files" class  = "imgpos"></img>
-    </div>
-<ul>
-   <p id= "msg"  > Rules : </p> 
+
+   <p class="list"  > Rules : </p> 
     <li class = "list"  > Move by pressing the up/down and side arrow keys.</li>
     <li class = "list" > Travel to each square until the whole board is green. </li>
-    <li class = "list" >  Exit the maze!</li>
-    <button class = "btn" id="btn">Dark</button>
-</ul>
+    <li class = "list"  >  Exit the maze!</li>
+    <button class = "btn" id="btn">Dark</button>w
+
     <script src="index.js"></script>
-    <script src="app.js" ></script>
+
     <noscript>You need to enable javascript to view this site.</noscript>
     </body>
 </html>

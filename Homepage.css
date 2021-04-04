@@ -256,6 +256,7 @@ text-align: center;
 position:absolute;
 float:right;
 transform: translate(150%,130%);
+opacity:80%;
 }
 .up div{
   background-image: none;
@@ -273,7 +274,7 @@ transform: translate(150%,130%);
   }
   @keyframes rev{
   from{transform:translate(0,60%); opacity:10%}
-  to{transform:translate(0%,300%); opacity:100%}
+  to{transform:translate(0%,300%); opacity:80%}
   }
 @keyframes C{
 from{color:orange; color:pink;}
@@ -285,27 +286,30 @@ background-size: 100%;
 border-radius: 50%;
 }
 .aboutme{
-transform: translate(100px,-35px);
+
 width: 40px;
 height: 40px;
 background-repeat: no-repeat;
 background-size: 100%;
+float:right;
+}
+.liningrightside{
+  float:right;
 }
 div#expand{
 font-size: x-large;
 }
 div.expand{
-margin:10px;
 height:700px;
-width:280px;
-padding:20px;
+width:100%;
 background: rgb(87, 3, 121);
 color:white;
 transition: all 1.5s ease;
+
 }
 div.hidden{
 white-space: nowrap;
-width:280px;
+width:100%;
 display: none;
 transition: all 1.5s ease;
 }
