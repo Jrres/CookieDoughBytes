@@ -1,12 +1,18 @@
-const GAMESTATE = {
+GAMESTATE = {
   PAUSED: 0,
   RUNNING: 1,
   MENU: 2,
   GAMEOVER: 3,
   NEWLEVEL: 4,
   INTRO: 5,
-  
 };
+class GameStates{
+  constructor(state){
+    this.state = state;
+
+  }
+}
+
 class background{
   constructor(){
     this.position={
@@ -16,12 +22,109 @@ class background{
   this.getintro = document.getElementById('introid');
   }
 }
+const POSES = {
+  NORMAL:0,
+  PUSH:1,
+  KICK:2,
+  ATTK:3,
+  LEFT: 4,
+  RIGHT:5,
+  Front: 6,
+};
+const spriteSheet = new Image();
+spriteSheet.src = "spritesheet.png";
+const frontimg = new Image();
+frontimg.src= "front.png";
+
+
+function left(ctx, game){
+ 
+ctx.drawImage(
+  spriteSheet,
+  150,
+  0,
+  200,
+  270,
+  game.paddle.position.x,
+  game.paddle.position.y,
+  150,
+  200,
+);
+}
+function Right(ctx, game){
+  ctx.drawImage(
+    spriteSheet,
+    0,
+    0,
+    150,
+    270,
+    game.paddle.position.x,
+    game.paddle.position.y,
+    120,
+    200,
+  );
+  }
+  function Front(ctx, game){
+    ctx.drawImage(
+      frontimg,
+      game.paddle.position.x,
+      game.paddle.position.y,
+      240,
+      250,
+    );
+    }
+    function attking(ctx, game, count){
+      if(count%5==0){
+        console.log(count);
+        ctx.drawImage(
+          game.paddle.attkanimations[1],
+          700/4,
+          700/5,
+          700/2,
+          700,
+          game.paddle.position.x,
+          game.paddle.position.y,
+          200,
+          250,
+        );
+      }
+      else{
+        ctx.drawImage(
+          game.paddle.attkanimations[0],
+          700/4,
+          700/5,
+          700/2,
+          700,
+          game.paddle.position.x,
+          game.paddle.position.y,
+          200,
+          250,
+        );
+      }
+    }
 class Paddle {
   constructor(game) {
+    this.count = 0;
+    this.image = document.getElementById('player');
+    this.push  = document.getElementById('push');
+    this.left;
+    this.right;
+    this.attk;
+
+    this.kickimg = new Image();
+    this.kickimg.src = "kicking.png"
+
+    this.attkanimations = [this.kickimg,this.push];
+
+
+
+    POSES.NORMAL;
+    this.poses = POSES.NORMAL;
+    
     this.gameWidth = game.gameWidth;
 
     this.width = 150;
-    this.height = 20;
+    this.height = 200;
 
     this.maxSpeed = 7;
     this.speed = 0;
@@ -32,15 +135,22 @@ class Paddle {
       y: game.gameHeight - this.height - 10
     };
   }
+
   reset(){
     this.position = {
       x: game.gameWidth / 2 - this.width / 2,
       y: game.gameHeight - this.height - 10
     };
   }
+ countpushes(){
+  if(this.poses === POSES.PUSH){
+    this.count++;
+  }
+}
   moveforward(){
     this.speedY= this.maxSpeed;
   }
+
   moveBackward(){
     this.speedY= -this.maxSpeed;
   }
@@ -57,6 +167,7 @@ class Paddle {
     this.speed = 0;
     this.speedY=0;
   }
+
   reset(){
     this.position = {
       x: game.gameWidth / 2 - this.width / 2,
@@ -65,11 +176,56 @@ class Paddle {
 }
 
   draw(ctx) {
-    ctx.fillStyle = "#0ff";
-    ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+    if(this.poses === POSES.NORMAL){
+    ctx.drawImage(
+      this.image,
+      this.position.x,
+      this.position.y,
+      240,
+      250,
+    );
+    }
+
+    if(this.poses === POSES.LEFT){
+      this.left = left(ctx,game);
+    }
+
+    if(this.poses === POSES.RIGHT){
+      this.right = Right(ctx,game);
+    }
+    if(this.poses === POSES.FRONT){
+      this.front = Front(ctx, game);
+    }
+    if(this.poses === POSES.PUSH){
+      this.attk= attking(ctx,game,this.count);
+    }
+
+  }
+  
+  faceLeft(){
+    if(this.poses !== POSES.LEFT)
+    this.poses= POSES.LEFT;
+  }
+  faceRight(){
+    if(this.poses !== POSES.RIGHT)
+    this.poses= POSES.RIGHT;
+}
+  pushframe(){
+    if(this.poses !== POSES.PUSH )
+    this.poses= POSES.PUSH;
   }
 
+  Normal(){
+    if(this.poses !== POSES.NORMAL )
+      this.poses = POSES.NORMAL;
+  }
+  Front(){
+    if(this.poses !== POSES.FRONT){
+      this.poses = POSES.FRONT;
+    }
+  }
   update(deltaTime) {
+   
     this.position.x += this.speed;
     this.position.y += this.speedY;//changed y direction
     if (this.position.x < 0) this.position.x = 0;
@@ -79,7 +235,7 @@ class Paddle {
   }
 }
 //bat
-  class Bat {
+  class Bat {//give bat health bar in css( by shifting gree bar down as health counter decreases )
   constructor(game) {
     this.image = document.getElementById("img_bat");
 
@@ -231,12 +387,14 @@ class InputHandler {
   constructor(paddle, game) {
     document.addEventListener("keydown", event => {
       switch (event.keyCode) {
-        case 37:
+        case 65:
           paddle.moveLeft();
+          paddle.faceLeft();
           break;
 
-        case 39:
+        case 68:
           paddle.moveRight();
+          paddle.faceRight();
           break;
 
         case 27:
@@ -247,36 +405,45 @@ class InputHandler {
           game.start();
           break;
 
-        case 40://w
+        case 83://w
           paddle.moveforward();
+          paddle.Normal();
           break;
 
-        case 38: 
+        case 87: 
           paddle.moveBackward();
+          paddle.Front();
+          break;
+        case 69://e 
+          paddle.pushframe();//canot be called push b/c its reserved met
+          paddle.countpushes();
           break;
       }
     });
 
     document.addEventListener("keyup", event => {
       switch (event.keyCode) {
-        case 37://<
+        case 65://<
           if (paddle.speed < 0 || paddle.speedY< 0 ) 
           paddle.stop();
           break;
 
-        case 39://>
+        case 68://>
           if (paddle.speed > 0  || paddle.speedY> 0) 
           paddle.stop();
           break;
 
-        case 40://w
+        case 83://w
           if (paddle.speedY > 0 ||  paddle.speed > 0)
           paddle.stop();
           break;
 
-        case 38: 
+        case 87: 
           if (paddle.speedY < 0 || paddle.speed < 0) 
           paddle.stop();
+          break;
+        case 69://e 
+          paddle.Normal();//might be the issue of laways in push mode
           break;
       }
     });
@@ -289,7 +456,8 @@ class Game {
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;
     this.background = new background();
-    this.gamestate = GAMESTATE.MENU;
+    this.gamestate = new GameStates(GAMESTATE.MENU);
+  
     this.bat = new Bat(this);
     this.paddle = new Paddle(this);
     this.sizeof =0; 
@@ -310,18 +478,18 @@ class Game {
   
   start() {//before game runs do an intro duction scene 
     if(this.currentLevel===0){
-    var audio = new Audio('song.mp3');
-    audio.volume = 0.2;
-    audio.currentTime=14;
-    audio.play();
+    var audio = new Audio("song.mp3");
+    //audio.volume = 0.2;
+    //audio.currentTime=14;
+    //audio.play();
     }
-    if(this.gamestate===GAMESTATE.GAMEOVER){
-
-    audio.currentTime = 0;
+    if(this.gamestate.state===GAMESTATE.GAMEOVER){
+    //audio.pause();
+   // audio.currentTime = 0;
     }
     if (
-      this.gamestate !== GAMESTATE.MENU &&
-      this.gamestate !== GAMESTATE.NEWLEVEL
+      this.gamestate.state !== GAMESTATE.MENU &&
+      this.gamestate.state !== GAMESTATE.NEWLEVEL
     )
       return;
 
@@ -336,25 +504,24 @@ class Game {
     this.gameObjects = [this.bat, this.paddle];   
     this.background;
     if(this.currentLevel===0){
-    this.gamestate = GAMESTATE.INTRO;
-    setTimeout(() => {  this.gamestate = GAMESTATE.RUNNING;}, 2000);  
+    this.gamestate.state = GAMESTATE.INTRO;
+    setTimeout(() => {  this.gamestate.state = GAMESTATE.RUNNING;}, 2000);  
      } else 
-    this.gamestate = GAMESTATE.RUNNING;
+    this.gamestate.state = GAMESTATE.RUNNING;
   }
   update(deltaTime) {
-    if (this.lives === 0) this.gamestate = GAMESTATE.GAMEOVER;
-
+    if (this.lives === 0) this.gamestate.state = GAMESTATE.GAMEOVER;
     if (
-      this.gamestate === GAMESTATE.PAUSED ||
-      this.gamestate === GAMESTATE.MENU ||
-      this.gamestate === GAMESTATE.GAMEOVER ||
-      this.gamestate === GAMESTATE.INTRO
+      this.gamestate.state === GAMESTATE.PAUSED ||
+      this.gamestate.state  === GAMESTATE.MENU ||
+      this.gamestate.state  === GAMESTATE.GAMEOVER ||
+      this.gamestate.state  === GAMESTATE.INTRO
     )
       return;
     
     if (this.bricks.length === 0) {
       this.currentLevel++;
-      this.gamestate = GAMESTATE.NEWLEVEL;
+      this.gamestate.state =GAMESTATE.NEWLEVEL;
       this.levels.push(new LevelCreate());
       this.bricks = buildLevel(this, this.levels[this.currentLevel].level);
       this.paddle.reset();
@@ -396,11 +563,11 @@ class Game {
         this.currentlives=this.lives;
         for( let i =10;i>0;i--){
     
-        ctx.fillStyle = "rgba(255,0,0,0.5)";
+        ctx.fillStyle = "rgba(i,0,0,0.5)";
         }
         for( let i =0;i<10;i++){
   
-          ctx.fillStyle = "rgba(255,0,0,0.5)";
+          ctx.fillStyle = "rgba(i,0,0,0.5)";
           }
         ctx.fill();
       }
@@ -416,6 +583,7 @@ class Game {
     ctx.fillText(bricksline, this.gameWidth -80, this.gameHeight-20);
     ctx.fillText(str, this.gameWidth -87, this.gameHeight);
     ctx.fillText(lives, this.gameWidth -79, this.gameHeight-40);
+    ctx.fillStyle = "rgba(255,255,255,10)";
 
     if(this.currentLevel!=0){
 
@@ -428,7 +596,7 @@ class Game {
       );
     }
 
-    if(this.gamestate == GAMESTATE.INTRO){
+    if(this.gamestate.state == GAMESTATE.INTRO){
       ctx.drawImage(
         this.background.getintro,
         this.background.position.x,
@@ -454,7 +622,7 @@ class Game {
       
     
     }
-    if (this.gamestate === GAMESTATE.PAUSED) {
+    if (this.gamestate.state === GAMESTATE.PAUSED) {
       ctx.rect(0, 0, this.gameWidth, this.gameHeight);
       ctx.fillStyle = "rgba(0,0,0,0.5)";
       ctx.fill();
@@ -465,7 +633,7 @@ class Game {
       ctx.fillText("Paused", this.gameWidth / 2, this.gameHeight / 2);
     }
 
-    if (this.gamestate === GAMESTATE.MENU) {//start game 
+    if (this.gamestate.state === GAMESTATE.MENU) {//start game 
       ctx.rect(0, 0, this.gameWidth, this.gameHeight);
       ctx.fillStyle = "rgba(0,0,0,1)";
       ctx.fill();
@@ -479,7 +647,7 @@ class Game {
         this.gameHeight / 2
       );
     }
-    if (this.gamestate === GAMESTATE.GAMEOVER) {
+    if (this.gamestate.state === GAMESTATE.GAMEOVER) {
       ctx.rect(0, 0, this.gameWidth, this.gameHeight);
       ctx.fillStyle = "rgba(0,0,0,1)";
       ctx.fill();
@@ -492,10 +660,10 @@ class Game {
   }
 
   togglePause() {
-    if (this.gamestate == GAMESTATE.PAUSED) {
-      this.gamestate = GAMESTATE.RUNNING;
+    if (this.gamestate.state == GAMESTATE.PAUSED) {
+      this.gamestate.state = GAMESTATE.RUNNING;
     } else {
-      this.gamestate = GAMESTATE.PAUSED;
+      this.gamestate.state = GAMESTATE.PAUSED;
     }
   }
 }
